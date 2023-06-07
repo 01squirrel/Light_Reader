@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_150"
+    android:paddingBottom="10dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_noteChapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/teal_200"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        tools:text="第一章" />
+    <TextView
+        android:id="@+id/tv_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/teal_200"
+        android:textSize="20sp"
+        android:layout_toEndOf="@+id/tv_noteChapter"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        tools:text="牢狱之灾" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black_500"
+        android:layout_below="@+id/tv_noteChapter"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/tv_setTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_below="@+id/tv_noteChapter"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        tools:text="2021-11-5"/>
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxEms="10"
+        android:lines="1"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_below="@+id/tv_setTime"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        tools:text="二月初二，鹅毛大雪，行人罕见,隐约可见"/>
+</RelativeLayout>

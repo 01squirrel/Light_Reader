@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/all_type"
+        android:title="@string/all_type" />
+    <item
+        android:id="@+id/Txt"
+        android:title="@string/txt" />
+    <item
+        android:id="@+id/other"
+        android:title="@string/other" />
+    <item
+        android:id="@+id/open_file"
+        android:title="@string/file_manage" />
+</menu>

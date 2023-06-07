@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.qmread">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application
+        android:name=".Utils.MyApplication"
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/logo_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/logo_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".SettingModule.acquire_help.FindCatalogueActivity"></activity>
+        <activity android:name=".SettingModule.acquire_help.ChangeNicknameHeadActivity" />
+        <activity android:name=".SettingModule.acquire_help.ChangeReadSettingActivity" />
+        <activity android:name=".SettingModule.acquire_help.ImportBookActivity" />
+        <activity android:name=".ComplaintModule.BookStoreActivity" />
+        <activity android:name=".MainViewModule.searchActivity" />
+        <activity android:name=".SettingModule.user_setting_page.LoginRegisterActivity" />
+        <activity android:name=".SettingModule.user_setting_page.DisposeAccountActivity" />
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/actions" />
+        <meta-data
+            android:name="DCLOUD_WRITE_EXTERNAL_STORAGE"
+            android:value="once" />
+        <meta-data
+            android:name="DCLOUD_READ_PHONE_STATE"
+            android:value="once" />
+
+        <activity android:name=".SettingModule.user_setting_page.uploadOpinionActivity" />
+        <activity android:name=".SettingModule.user_setting_page.AboutActivity" />
+        <activity android:name=".SettingModule.user_setting_page.secretActivity" />
+        <activity android:name=".SettingModule.user_setting_page.accountSafetyActivity" />
+        <activity android:name=".SettingModule.HelpAndFeedbackActivity" />
+        <activity android:name=".SettingModule.user_setting_page.SettingActivity" />
+        <activity android:name=".SettingModule.EditPersonInfoActivity" />
+        <activity android:name=".SettingModule.PersonInfoActivity" />
+        <activity android:name=".SettingModule.NoticeMessageActivity" />
+        <activity android:name=".SettingModule.MoreSettingActivity" />
+        <activity android:name=".ReadingModule.Catalogue" />
+        <activity
+            android:name=".ReadingModule.ReadBook"
+            android:theme="@style/Theme.Guide.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity android:name=".MainViewModule.BookIntroduction" />
+        <activity
+            android:name=".MainViewModule.SplashActivity"
+            android:theme="@style/LanucherTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainViewModule.yinDaoActivity" />
+        <activity
+            android:name=".MainViewModule.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
+    </application>
+
+</manifest>

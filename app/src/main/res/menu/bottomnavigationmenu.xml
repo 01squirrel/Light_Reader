@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <item android:id="@+id/bookcity"-->
+<!--        android:title="@string/book_city"-->
+<!--        android:icon="@drawable/icons8_bookshop"/>-->
+    <item android:id="@+id/bookshelf"
+        android:title="@string/book_shelf"
+        android:icon="@drawable/icons8_bookshelf"/>
+    <item android:id="@+id/filemanage"
+        android:title="@string/file_manage"
+        android:icon="@drawable/icons8_categorize"/>
+    <item android:id="@+id/user"
+        android:title="@string/user"
+        android:icon="@drawable/icons8_user"/>
+</menu>

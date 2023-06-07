@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/man"
+        android:title="@string/man" />
+    <item
+        android:id="@+id/women"
+        android:title="@string/women" />
+    <item
+        android:id="@+id/choose_none"
+        android:title="@string/no_choice" />
+    <item
+        android:id="@+id/cancel"
+        android:title="@string/cancel" />
+
+</menu>

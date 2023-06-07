@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SettingModule.EditPersonInfoActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_50"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_backOnce"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_marginStart="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_20"
+        android:contentDescription="@string/back"
+        android:clickable="true"
+        android:src="@mipmap/back_24px"
+        android:focusable="true" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:text="@string/edit_personInfo"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        app:backgroundTint="@color/white"
+        android:text="@string/save"
+        android:textColor="@color/green_4"
+        android:textSize="@dimen/sp_18" />
+</LinearLayout>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/riv_head"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        android:layout_marginTop="@dimen/dp_40"
+        android:layout_marginStart="@dimen/dp_20"
+        android:scaleType="centerCrop"
+        app:riv_oval="true"
+        app:riv_border_color="@color/grey_b1"
+        app:riv_border_width="@dimen/dp_1"
+        android:src="@mipmap/head"
+        android:contentDescription="@string/headportrait" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_30">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nickName"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/black"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_name"
+            android:layout_width="@dimen/dp_240"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_50"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:theme="@style/MyEditText"
+            android:imeOptions="actionDone"/>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rl_sexSelect"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_30">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sex"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"/>
+       <TextView
+           android:id="@+id/tv_sex"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textSize="@dimen/sp_18"
+           android:textColor="@color/black"
+           android:layout_marginStart="@dimen/dp_90" />
+        <View
+            android:layout_width="@dimen/dp_230"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/grey_dc"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/dp_90"/>
+        <ImageView
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:src="@mipmap/forward_50px"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:contentDescription="@string/right"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_birth"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_30">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/birth"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"/>
+        <TextView
+            android:id="@+id/tv_birth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/dp_90" />
+        <View
+            android:layout_width="@dimen/dp_230"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/grey_dc"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/dp_90"/>
+        <ImageView
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:src="@mipmap/forward_50px"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:contentDescription="@string/right"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_30">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/introduce"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/black"/>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_sign"
+            android:layout_width="@dimen/dp_240"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_50"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:theme="@style/MyEditText"
+            android:imeOptions="actionDone"/>
+    </LinearLayout>
+
+</LinearLayout>

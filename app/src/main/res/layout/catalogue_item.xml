@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
+<TextView
+    android:id="@+id/tv_num"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/sp_20"
+    android:textColor="@color/black"
+    android:layout_marginTop="@dimen/dp_20"
+    android:layout_marginStart="@dimen/dp_20"
+    tools:text="第1章"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_chaName"
+        tools:text="牢狱之灾"
+        android:textSize="@dimen/sp_20"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_toEndOf="@+id/tv_num"
+        android:layout_marginStart="@dimen/dp_20"/>
+</RelativeLayout>

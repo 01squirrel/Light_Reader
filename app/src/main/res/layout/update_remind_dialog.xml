@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="@dimen/dp_20"
+    android:layout_marginBottom="@dimen/dp_25"
+    android:background="@drawable/dialog_background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remind_text"
+        android:textSize="@dimen/sp_24"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remind_option"
+        android:textSize="@dimen/sp_18"
+        android:layout_marginTop="@dimen/dp_100"
+        android:layout_marginStart="@dimen/dp_25"/>
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sm_remind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dp_90"
+        android:layout_marginEnd="@dimen/dp_25"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="@color/grey_dc"
+        android:layout_marginTop="@dimen/dp_170"
+        android:layout_marginHorizontal="@dimen/dp_20"/>
+    <TextView
+        android:id="@+id/tv_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:textSize="@dimen/sp_18"
+        android:layout_marginTop="@dimen/dp_200"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>

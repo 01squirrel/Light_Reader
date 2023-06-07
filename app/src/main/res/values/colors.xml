@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="black_500">#9e9e9e</color>
+    <color name="black_8c">#8C8C8C</color>
+    <color name="night">#161616</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_f6">#F6F6F6</color>
+    <color name="white_50">#fafafa</color>
+    <color name="white_100">#f5f5f5</color>
+    <color name="white_140">#f0f0f0</color>
+    <color name="grey_b">#F7F6F1</color>
+    <color name="grey_400">#bdbdbd</color>
+    <color name="grey_b1">#B1B1BB</color>
+    <color name="grey_dc">#DCDFE4</color>
+    <color name="grey_register">#F5F6FA</color>
+    <color name="blue_register">#3290F2</color>
+    <color name="blue_500">#03a9f4</color>
+    <color name="white_150">#EBEBEB</color>
+    <color name="green_1">#CCFFCC</color>
+    <color name="green_2">#CCFF99</color>
+    <color name="green_3">#99CC99</color>
+    <color name="green_a3">#A3A691</color>
+    <color name="green_4">#66CC99</color>
+    <color name="green_5">#D7EFD7</color>
+    <color name="green_bk">#D7EFD7</color>
+    <color name="green_6">#23472A</color>
+    <color name="green_d5">#D5D7C9</color>
+    <color name="yellow">#FFFFCC</color>
+    <color name="yellow_2">#FFFF99</color>
+    <color name="yellow_3">#FFCC33</color>
+    <color name="yellow_4">#E2C386</color>
+    <color name="font">#462E0A</color>
+    <color name="font1">#E0DED3</color>
+    <color name="font2">#EBDBBC</color>
+    <color name="font3">#929987</color>
+    <color name="font4">#717171</color>
+    <color name="book">#DED9C5</color>
+    <color name="back_1">#FAF6ED</color>
+    <color name="back_2">#CCD8E4</color>
+    <color name="cb">#E7544D</color>
+    <color name="text_color1">#AC6E3D</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="nightColorPrimary">#3b3b3b</color>
+    <color name="nightColorPrimaryDark">#383838</color>
+    <color name="nightColorAccent">#a72b55</color>
+</resources>
