@@ -49,24 +49,25 @@ public class HttpUtil {
 
     /**
      * 工具拦截器
- */
+     */
     public static class InterceptorUtil {
-        public static final String TAG="------";
+        public static final String TAG = "------";
+
         public static HttpLoggingInterceptor LogInterceptor() {     //日志拦截器,用于打印返回请求的结果
             return new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                 @Override
                 public void log(@NotNull String message) {
-                    Log.w(TAG,"log:"+message);
+                    Log.w(TAG, "log:" + message);
                 }
             }).setLevel(HttpLoggingInterceptor.Level.BODY);
         }
 
-        public static Interceptor HeaderInterceptor(){      //头部添加请求头信息
+        public static Interceptor HeaderInterceptor() {      //头部添加请求头信息
             return new Interceptor() {
                 @Override
                 public @NotNull Response intercept(@NotNull Chain chain) throws IOException {
-                    Request request=chain.request().newBuilder().
-                            addHeader("Content-Type","application/json;charSet=UTF-8").build();
+                    Request request = chain.request().newBuilder().
+                            addHeader("Content-Type", "application/json;charSet=UTF-8").build();
                     return chain.proceed(request);
                 }
             };
@@ -74,16 +75,17 @@ public class HttpUtil {
     }
 
     /* 请求方法类
- */
-    public interface ApiServise {
+     */
+    public interface ApiService {
         //https://api.apiopen.top/musicDetails?id=604392760  接口完整路径
         /**
          * get请求方式
-         * @Query
-         * 造成单个查询参数, 将接口url中追加相似于"page=1"的字符串,造成提交给服务器端的参数,
+         *
+         * @Query 造成单个查询参数, 将接口url中追加相似于"page=1"的字符串,造成提交给服务器端的参数,
          * 主要用于Get请求数据，用于拼接在拼接在url路径后面的查询参数，一个@Query至关于拼接一个参数
          */
         String HOST = "https://api.apiopen.top";        //接口地址
+
         @GET("/musicDetails")
         Observable<BaseResponse<Book>> getConcat(@Query("id") String id);
 
@@ -91,14 +93,16 @@ public class HttpUtil {
          * post请求方式
          */
         @FormUrlEncoded         //post请求必需要申明该注解
-        @POST("musicDetails")   //方法名
+        @POST("musicDetails")
+        //方法名
         Observable<BaseResponse<Book>> getInfo(@Field("id") String data);//请求参数
     }
 
     /**
      * get请求
-     * @param address
-     * @param callback
+     *
+     * @param address 请求地址
+     * @param callback 结果回调
      */
     public static void sendGetRequest(final String address, BaseObserver callback) {
         new Thread(new Runnable() {
@@ -142,8 +146,9 @@ public class HttpUtil {
 
     /**
      * 网络通信测试请求
-     * @param address
-     * @param callback
+     *
+     * @param address 请求地址
+     * @param callback 结果回调
      */
     public static void sendTestGetRequest(final String address, BaseObserver callback) {
         new Thread(new Runnable() {
@@ -187,11 +192,12 @@ public class HttpUtil {
 
     /**
      * post请求
-     * @param address
-     * @param output
-     * @param callback
+     *
+     * @param address 请求地址
+     * @param output 上传的参数
+     * @param callback 结果回调
      */
-    public static void sendPostRequest(final String address, final String output, BaseObserver  callback) {
+    public static void sendPostRequest(final String address, final String output, BaseObserver callback) {
         new Thread(new Runnable() {
             HttpURLConnection connection = null;
 
@@ -228,12 +234,14 @@ public class HttpUtil {
 
     /**
      * 图片发送
-     * @param address
-     * @param callback
+     *
+     * @param address 请求地址
+     * @param callback 结果回调
      */
     public static void sendBitmapGetRequest(final String address, BaseObserver callback) {
         new Thread(new Runnable() {
             HttpURLConnection connection = null;
+
             @Override
             public void run() {
                 try {
@@ -271,12 +279,12 @@ public class HttpUtil {
     }
 
 
-
     /**
      * 生成URL
-     * @param p_url
-     * @param params
-     * @return
+     *
+     * @param p_url url
+     * @param params 参数
+     * @return URL
      */
     public static String makeURL(String p_url, Map<String, Object> params) {
 
@@ -294,12 +302,12 @@ public class HttpUtil {
             try {
                 if (isRSA) {
                     if (name.equals("token")) {
-                        url.append(valueOf(params.get(name)));
+                        url.append(params.get(name));
                     } else {
                         //url.append(StringHelper.encode(Base64.encodeToString(RSAUtilV2.encryptByPublicKey(valueOf(params.get(name)).getBytes(), APPCONST.publicKey), Base64.DEFAULT).replace("\n", "")));
                     }
                 } else {
-                    url.append(valueOf(params.get(name)));
+                    url.append(params.get(name));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -310,17 +318,18 @@ public class HttpUtil {
 
     /**
      * 多文件上传请求
+     *
      * @param url
      * @param files
      * @param params
      * @param callback
      */
-    public static void uploadFile(String url, ArrayList<File> files, Map<String, Object> params, BaseObserver callback){
+    public static void uploadFile(String url, ArrayList<File> files, Map<String, Object> params, BaseObserver callback) {
         OkHttpClient client = new OkHttpClient();
         // form 表单形式上传
         MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        for(File file : files){
-            if(file != null){
+        for (File file : files) {
+            if (file != null) {
                 // MediaType.parse() 里面是上传的文件类型。
                 RequestBody body = RequestBody.create(MediaType.parse("*/*"), file);
                 String filename = file.getName();
@@ -341,7 +350,7 @@ public class HttpUtil {
             @Override
             public void onFailure(Call call, IOException e) {
                 callback.onError(e);
-                Log.i("Http" ,"onFailure");
+                Log.i("Http", "onFailure");
             }
 
             @Override
@@ -354,12 +363,10 @@ public class HttpUtil {
                     JsonModel jsonModel = new JsonModel();
                     jsonModel.setSuccess(false);
                     callback.onFinish(new Gson().toJson(jsonModel));
-                    Log.i("Http" ,response.message() + " error : body " + response.body().string());
+                    Log.i("Http", response.message() + " error : body " + response.body().string());
                 }
             }
-
         });
-
     }
 
     /**

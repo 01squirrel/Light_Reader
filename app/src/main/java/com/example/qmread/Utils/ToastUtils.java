@@ -6,7 +6,7 @@ import android.widget.Toast;
 public class ToastUtils {
     private static Toast toast;
 
-    private static CustomToast customToast;
+    private CustomToast customToast;
 
     /**
      * 自定义CustomToast的显示
@@ -14,7 +14,7 @@ public class ToastUtils {
      * @param message   提示内容
      * @param playAnimate   是否显示动画  true，显示     false，不显示
      */
-    public static void showToast(Context context, String message, boolean playAnimate){
+    public void showToast(Context context, String message, boolean playAnimate){
 
         if (customToast == null){
             customToast = new CustomToast(context);

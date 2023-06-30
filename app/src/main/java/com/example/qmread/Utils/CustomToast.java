@@ -44,22 +44,22 @@ public class CustomToast extends View {
     private boolean isSmileLeft = false;
     private boolean isSmileRight = false;
 
-    public CustomToast(Context context){
+    public CustomToast(Context context) {
         super(context);
         this.context = context;
     }
 
-    public CustomToast(Context context, AttributeSet attrs){
+    public CustomToast(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
     }
 
-    public CustomToast(Context context, AttributeSet attrs, int defStyleAttr){
+    public CustomToast(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
     }
 
-    private void initPaint(){
+    private void initPaint() {
         paint = new Paint();
         paint.setAntiAlias(true);   //抗锯齿
         paint.setStyle(Paint.Style.STROKE); //画笔的样式：空心
@@ -67,12 +67,12 @@ public class CustomToast extends View {
         paint.setStrokeWidth(dip2px(2));    //设置笔刷的粗细
     }
 
-    private void initRect(){
-        rectF = new RectF(mPadding, mPadding, mWidth-mPadding, mWidth-mPadding);
+    private void initRect() {
+        rectF = new RectF(mPadding, mPadding, mWidth - mPadding, mWidth - mPadding);
     }
 
     //dip转px。为了支持多分辨率手机
-    public int dip2px(float dpValue){
+    public int dip2px(float dpValue) {
         final float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
@@ -92,27 +92,27 @@ public class CustomToast extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawArc(rectF, 180, endAngle, false, paint );    //画微笑圆弧
+        canvas.drawArc(rectF, 180, endAngle, false, paint);    //画微笑圆弧
         paint.setStyle(Paint.Style.FILL);   //画笔的样式：实心
-        if (isSmileLeft){
-            canvas.drawCircle(mPadding+mEyeWidth+mEyeWidth/2, mWidth/3, mEyeWidth, paint);  //绘制圆圈
+        if (isSmileLeft) {
+            canvas.drawCircle(mPadding + mEyeWidth + mEyeWidth / 2, mWidth / 3, mEyeWidth, paint);  //绘制圆圈
         }
-        if (isSmileRight){
-            canvas.drawCircle(mWidth-mPadding-mEyeWidth-mEyeWidth/2, mWidth/3, mEyeWidth, paint);
+        if (isSmileRight) {
+            canvas.drawCircle(mWidth - mPadding - mEyeWidth - mEyeWidth / 2, mWidth / 3, mEyeWidth, paint);
         }
     }
 
     //开启动画
-    public void startAnimator(boolean playAnimate){
-        if (playAnimate){
+    public void startAnimator(boolean playAnimate) {
+        if (playAnimate) {
             stopAnimator();
             startViewAnim(0f, 1f, 2000);
         }
     }
 
     //停止动画
-    public void stopAnimator(){
-        if (valueAnimator != null){
+    public void stopAnimator() {
+        if (valueAnimator != null) {
             clearAnimation();
             isSmileLeft = false;
             isSmileRight = false;
@@ -123,12 +123,13 @@ public class CustomToast extends View {
 
     /**
      * 开始动画
+     *
      * @param start 起始值
      * @param end   结束值
      * @param time  动画的时间
      * @return
      */
-    public ValueAnimator startViewAnim(float start, float end, long time){
+    public ValueAnimator startViewAnim(float start, float end, long time) {
 
         valueAnimator = ValueAnimator.ofFloat(start, end);  //设置 ValueAnimator 的起始值和结束值
         valueAnimator.setDuration(time);    //设置动画时间
@@ -137,15 +138,15 @@ public class CustomToast extends View {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mAnimatedValue = (float) valueAnimator.getAnimatedValue();
-                if (mAnimatedValue < 0.5){
+                if (mAnimatedValue < 0.5) {
                     isSmileLeft = false;
                     isSmileRight = false;
                     endAngle = -360 * (mAnimatedValue);
-                } else if (mAnimatedValue > 0.55 && mAnimatedValue < 0.7){
+                } else if (mAnimatedValue > 0.55 && mAnimatedValue < 0.7) {
                     endAngle = -180;
                     isSmileLeft = true;
                     isSmileRight = false;
-                } else{
+                } else {
                     endAngle = -180;
                     isSmileLeft = true;
                     isSmileRight = true;
@@ -154,7 +155,7 @@ public class CustomToast extends View {
             }
         });
 
-        if (!valueAnimator.isRunning()){
+        if (!valueAnimator.isRunning()) {
             valueAnimator.start();
         }
         return valueAnimator;
@@ -164,27 +165,27 @@ public class CustomToast extends View {
      * 本质上还是依赖Android原生Toast的显示方法来进行显示，
      * 只是引入了自定义的布局，添加了自定义动画
      */
-    public void show(String message, boolean playAnimate){
+    public void show(String message, boolean playAnimate) {
 
         /* 解决多次点击Toast一直提示不消失问题 */
-        if (toast == null){
+        if (toast == null) {
             toast = new Toast(context);
         }
         View customToastView = LayoutInflater.from(context).inflate(R.layout.toast_custom, null);
         TextView msg2 = (TextView) customToastView.findViewById(R.id.tv_msg);
         msg2.setText(message);
-       // msg2.setBackgroundResource(R.drawable.shape_text_toast);
+        // msg2.setBackgroundResource(R.drawable.shape_text_toast);
         msg2.setTextColor(Color.parseColor("#ffffff"));
 
         ImageView img2 = (ImageView) customToastView.findViewById(R.id.iv_img);
         //img2.setImageResource(R.mipmap.jyfr_icon_mpossh3x);
 //        img2.setVisibility(View.GONE);
 
-       // CustomToast customToast = (CustomToast) customToastView.findViewById(R.id.smileView);
+        // CustomToast customToast = (CustomToast) customToastView.findViewById(R.id.smileView);
         //customToast.startAnimator(playAnimate);
 
         toast.setView(customToastView);
-        toast.setGravity(Gravity.BOTTOM, 0 , 0);
+        toast.setGravity(Gravity.BOTTOM, 0, 0);
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
     }

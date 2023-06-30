@@ -10,6 +10,9 @@ import android.util.Log;
 
 import com.example.qmread.Utils.ToolKits;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class LifeCycleCallback implements Application.ActivityLifecycleCallbacks {
         /**
          * 上次检查时间，用于在运行时作为基准获取用户时间
@@ -57,7 +60,7 @@ public class LifeCycleCallback implements Application.ActivityLifecycleCallbacks
         @Override
         public void onActivityStarted(Activity activity) {
             Log.i("start=====","onActivityStarted " + activity.getClass().getSimpleName() + " " + foregroundActivityCount);
-            //前台没有Activity，说明新启动或者将从从后台恢复
+            //前台没有Activity，说明新启动或者将从后台恢复
             if (foregroundActivityCount == 0 || !isForegroundNow) {
                 willSwitchToForeground = true;
             } else {
@@ -101,7 +104,7 @@ public class LifeCycleCallback implements Application.ActivityLifecycleCallbacks
         public void onActivityStopped(Activity activity) {
             Log.i("stop=====","onActivityStopped" + getActivityName(activity));
             addAppUseReduceTimeIfNeeded(activity);
-            //如果这个Activity实在修改配置，如旋转等，则不保存时间直接返回
+            //如果这个Activity是在修改配置，如旋转等，则不保存时间直接返回
             if (activity.isChangingConfigurations()) {
                 isChangingConfigActivity = true;
                 return;
@@ -170,8 +173,9 @@ public class LifeCycleCallback implements Application.ActivityLifecycleCallbacks
          */
         private void saveTodayPlayTime(Context context, long time) {
             long todayTime = ToolKits.getLong(context, "APP_USE_TIME", (long) 0);
-
-            Log.i("time-----","使用时长Log:" + (todayTime + time));
+            SimpleDateFormat format = new SimpleDateFormat("MM:ss", Locale.CHINA);
+            String totalTime = format.format(todayTime + time);
+            Log.i("time-----","使用时长Log:" + totalTime);
             ToolKits.putLong(context, "APP_USE_TIME", todayTime + time);
         }
 

@@ -95,10 +95,12 @@ public class BookStoreActivity extends AppCompatActivity {
                     .setMessage("是否确定从本地删除该书籍")
                     .setNegativeButton("取消",(dialog,which)-> dialog.dismiss())
                     .setPositiveButton("确定",(dialog,which)->{
-                        DaoUtilsStore.getInstance().getUserDaoUtils().delete(books.get(p));
+                        boolean delete = DaoUtilsStore.getInstance().getUserDaoUtils().delete(books.get(p));
                         dialog.dismiss();
-                        toast.setGravity(Gravity.TOP,0,height/4);
-                        toast.show();
+                        if (delete) {
+                            toast.setGravity(Gravity.TOP,0,height/4);
+                            toast.show();
+                        }
                         books= store.getUserDaoUtils().queryAll();
                         adapter = new BookItemAdapter(books);
                         bookList.setAdapter(adapter);

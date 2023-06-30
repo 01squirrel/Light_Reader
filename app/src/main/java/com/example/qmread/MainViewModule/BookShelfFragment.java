@@ -66,16 +66,16 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
     private List<BookEntity> books = new ArrayList<>();
     private FragmentBookShelfBinding binding;
     private BookAdapter bookAdapter;
-    private final HashMap<Integer,Boolean> mCheckedList =  new HashMap<>();
+    private final HashMap<Integer, Boolean> mCheckedList = new HashMap<>();
     public static boolean is_action_mode = false;
     public static boolean is_selected_all = false;
     private onGetFragmentValueListener listener;
     Context bookFrg;
     RecyclerView rvBook;
-    LinearLayout top,menu;
+    LinearLayout top, menu;
     RelativeLayout book;
-    ImageView more,search;
-    TextView manage,get,update;
+    ImageView more, search;
+    TextView manage, get, update;
     Dialog dialog;
     Dialog tipDialog;
     ReadNoticeBinding noticeBinding;
@@ -100,13 +100,14 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
         return fragment;
     }
 
-    public interface onGetFragmentValueListener{
+    public interface onGetFragmentValueListener {
         void choseNumber(Set<BookEntity> total);
+
         void show(boolean hidden);
     }
 
     ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
-        Log.i("TAG", ": "+result);
+        Log.i("TAG", ": " + result);
     });
 
     @Override
@@ -122,45 +123,45 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentBookShelfBinding.inflate(inflater,container,false);
+        binding = FragmentBookShelfBinding.inflate(inflater, container, false);
         readTime = binding.zero;
         books = store.getUserDaoUtils().queryAll();
         bookFrg = new BookShelfFragment().getContext();
         rvBook = binding.rvBookList;
         TextView checkSum = binding.tvCheckNum;
-        GridLayoutManager gm = new GridLayoutManager(bookFrg,3);
+        GridLayoutManager gm = new GridLayoutManager(bookFrg, 3);
         rvBook.setLayoutManager(gm);
         rvBook.setHasFixedSize(true);
         rvBook.setNestedScrollingEnabled(true);
-        for(int i =0;i<books.size();i++){
-            mCheckedList.put(i,false);
+        for (int i = 0; i < books.size(); i++) {
+            mCheckedList.put(i, false);
         }
         bookAdapter = new BookAdapter(bookFrg, books, mCheckedList);
         rvBook.setAdapter(bookAdapter);
         bookAdapter.notifyDataSetChanged();
-        bookAdapter.setOnItemClickListener((position,sum) -> {
-            if(!is_action_mode){
-                permissionLauncher.launch(new String[]{Manifest.permission.WRITE_SETTINGS,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE});
+        bookAdapter.setOnItemClickListener((position, sum) -> {
+            if (!is_action_mode) {
+                permissionLauncher.launch(new String[]{Manifest.permission.WRITE_SETTINGS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE});
                 Intent intent = new Intent(getActivity(), ReadBook.class);
-                intent.putExtra("BookName",books.get(position).getName());
-                intent.putExtra("position",position);
-                ToolKits.putString(requireContext(),"lastBook",books.get(position).getName());
+                intent.putExtra("BookName", books.get(position).getName());
+                intent.putExtra("position", position);
+                ToolKits.putString(requireContext(), "lastBook", books.get(position).getName());
                 books.get(position).setPosition(1);
                 bookAdapter.notifyDataSetChanged();
                 startActivity(intent);
-            }else {
-                Log.i("选到了", "onCreateView: --"+sum);
+            } else {
+                Log.i("选到了", "onCreateView: --" + sum);
                 Set<BookEntity> entities = new LinkedHashSet<>();
                 int a = BookAdapter.selectedNumber();
-                if(a>0){
-                    String text = String.format(getResources().getString(R.string.checkNumber),a);
-                    Log.i("TAG", "onCreateView: "+text);
-                    for(int i :sum){
+                if (a > 0) {
+                    String text = String.format(getResources().getString(R.string.checkNumber), a);
+                    Log.i("TAG", "onCreateView: " + text);
+                    for (int i : sum) {
                         entities.add(books.get(i));
                     }
                     listener.choseNumber(entities);
                     checkSum.setText(text);
-                }else {
+                } else {
                     checkSum.setText("已选择0本书");
                     binding.tvChooseAll.setText("全选");
                 }
@@ -171,14 +172,14 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
         more = binding.ivMore;
         search = binding.ivSearch;
         more.setOnClickListener(v -> {
-            if(menu.getVisibility() == View.GONE){
+            if (menu.getVisibility() == View.GONE) {
                 menu.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 menu.setVisibility(View.GONE);
             }
         });
         search.setOnClickListener(v -> {
-            startActivity(new Intent(requireContext(),searchActivity.class));
+            startActivity(new Intent(requireContext(), searchActivity.class));
         });
 //        Bundle bundle = this.getArguments();
 //        time = bundle.getInt("readTime");
@@ -195,15 +196,15 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
         top = binding.llTop;
         RelativeLayout noBook = binding.rlNoBook;
         book = binding.rlEditBook;
-        if(books != null){
+        if (books != null) {
             noBook.setVisibility(View.GONE);
             rvBook.setVisibility(View.VISIBLE);
         }
         addBook.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(),FileManageFragment.class));
+            startActivity(new Intent(getActivity(), FileManageFragment.class));
         });
         edit.setOnClickListener(v -> {
-            if(top.getVisibility() == View.VISIBLE){
+            if (top.getVisibility() == View.VISIBLE) {
                 top.setVisibility(View.INVISIBLE);
                 book.setVisibility(View.VISIBLE);
                 is_action_mode = true;
@@ -216,8 +217,8 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
             book.setVisibility(View.INVISIBLE);
             is_action_mode = false;
             listener.show(is_action_mode);
-            for(int i =0;i<books.size();i++){
-                mCheckedList.put(i,false);
+            for (int i = 0; i < books.size(); i++) {
+                mCheckedList.put(i, false);
             }
             BookAdapter.setChose(mCheckedList);
             bookAdapter.notifyDataSetChanged();
@@ -226,9 +227,9 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
         TextView pickAll = binding.tvChooseAll;
         pickAll.setOnClickListener(v -> {
             int size = books.size();
-            if(!is_selected_all){
-                for(int i =0;i<size;i++){
-                    mCheckedList.put(i,true);
+            if (!is_selected_all) {
+                for (int i = 0; i < size; i++) {
+                    mCheckedList.put(i, true);
                 }
                 BookAdapter.setChose(mCheckedList);
                 bookAdapter.notifyDataSetChanged();
@@ -236,10 +237,10 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
                 pickAll.setText("取消全选");
                 is_selected_all = true;
                 listener.show(is_action_mode);
-            }else {
+            } else {
                 pickAll.setText("全选");
-                for(int i =0;i<size;i++){
-                    mCheckedList.put(i,false);
+                for (int i = 0; i < size; i++) {
+                    mCheckedList.put(i, false);
                 }
                 BookAdapter.setChose(mCheckedList);
                 bookAdapter.notifyDataSetChanged();
@@ -254,7 +255,7 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
         update = binding.tvUpdate;
         manage = binding.tvManageBook;
         manage.setOnClickListener(v -> {
-            if(top.getVisibility() == View.VISIBLE){
+            if (top.getVisibility() == View.VISIBLE) {
                 top.setVisibility(View.INVISIBLE);
                 book.setVisibility(View.VISIBLE);
                 is_action_mode = true;
@@ -274,7 +275,7 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
             dialogBinding = UpdateRemindDialogBinding.inflate(getLayoutInflater());
             dialog.setContentView(dialogBinding.getRoot());
             ViewGroup.LayoutParams params = dialogBinding.getRoot().getLayoutParams();
-            params.width = (int) (getResources().getDisplayMetrics().widthPixels*0.8);
+            params.width = (int) (getResources().getDisplayMetrics().widthPixels * 0.8);
             dialogBinding.getRoot().setLayoutParams(params);
             dialog.getWindow().setGravity(Gravity.BOTTOM);
             dialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
@@ -282,9 +283,9 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
             TextView del = dialogBinding.tvNo;
             del.setOnClickListener(view1 -> dialog.dismiss());
         });
-           bookInfo = ToolKits.getString(requireContext(),"lastBook","");
+        bookInfo = ToolKits.getString(requireContext(), "lastBook", "");
         showMessage();
-        if(!bookInfo.isEmpty()){
+        if (!bookInfo.isEmpty()) {
             tipDialog.show();
         }
     }
@@ -293,9 +294,9 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
     @Override
     public void onAttach(@NonNull @NotNull Context context) {
         super.onAttach(context);
-        if(context instanceof onGetFragmentValueListener){
+        if (context instanceof onGetFragmentValueListener) {
             this.listener = (onGetFragmentValueListener) context;
-        }else {
+        } else {
             throw new IllegalStateException("You activity must implement the callback");
         }
     }
@@ -341,13 +342,13 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
 
     }
 
-    public void refreshData(boolean refresh){
+    public void refreshData(boolean refresh) {
         DaoUtilsStore store;
-        if(refresh){
+        if (refresh) {
             store = DaoUtilsStore.getInstance();
             books = store.getUserDaoUtils().queryAll();
-            for(int i =0;i<books.size();i++){
-                mCheckedList.put(i,false);
+            for (int i = 0; i < books.size(); i++) {
+                mCheckedList.put(i, false);
             }
             bookFrg = new BookShelfFragment().getContext();
             bookAdapter = new BookAdapter(bookFrg, books, mCheckedList);
@@ -357,11 +358,11 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
     }
 
     private void showMessage() {
-        tipDialog = new Dialog(requireContext(),R.style.dialog_style);
+        tipDialog = new Dialog(requireContext(), R.style.dialog_style);
         noticeBinding = ReadNoticeBinding.inflate(getLayoutInflater());
         tipDialog.setContentView(noticeBinding.getRoot());
         ViewGroup.LayoutParams params = noticeBinding.getRoot().getLayoutParams();
-        params.width = (int) (getResources().getDisplayMetrics().widthPixels*0.8);
+        params.width = (int) (getResources().getDisplayMetrics().widthPixels * 0.8);
         WindowManager.LayoutParams layoutParams = tipDialog.getWindow().getAttributes();
         layoutParams.y = 150;
         noticeBinding.getRoot().setLayoutParams(params);
@@ -376,26 +377,26 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
         });
         startRead = noticeBinding.mbRead;
         startRead.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(),ReadBook.class);
-            intent.putExtra("BookName",bookInfo);
-            if (!bookInfo.isEmpty()){
+            Intent intent = new Intent(requireContext(), ReadBook.class);
+            intent.putExtra("BookName", bookInfo);
+            if (!bookInfo.isEmpty()) {
                 startActivity(intent);
             }
         });
         new Handler().postDelayed(() -> {
             tipDialog.cancel();
-        },5000);
+        }, 5000);
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden){
+        if (!hidden) {
             DaoUtilsStore store = DaoUtilsStore.getInstance();
-            books=(store.getUserDaoUtils().queryAll());
+            books = (store.getUserDaoUtils().queryAll());
             bookFrg = new BookShelfFragment().getContext();
-            for(int i =0;i<books.size();i++){
-                mCheckedList.put(i,false);
+            for (int i = 0; i < books.size(); i++) {
+                mCheckedList.put(i, false);
             }
             bookAdapter = new BookAdapter(bookFrg, books, mCheckedList);
             rvBook.setAdapter(bookAdapter);
@@ -418,12 +419,12 @@ public class BookShelfFragment extends Fragment implements BookShelfContract.Vie
 
     }
 
-    private void countTime(){
-        for(int i =0;i<books.size();i++){
+    private void countTime() {
+        for (int i = 0; i < books.size(); i++) {
             time += books.get(i).getSecondPosition();
         }
-        if(time>60){
-            int min = time/60;
+        if (time > 60) {
+            int min = time / 60;
             readTime.setText(String.valueOf(min));
         }
     }

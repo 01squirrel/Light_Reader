@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import com.example.qmread.R;
 
 public class StatusBarUtil {
-    public static void makeStatusBarTransparent(Activity activity,int name) {
+    public static void makeStatusBarTransparent(Activity activity, int color) {
 
         Window window = activity.getWindow();
 
@@ -20,10 +20,10 @@ public class StatusBarUtil {
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         //window.setStatusBarColor(getResources().getColor(R.color.white_f6));
-        if(name!=0){
-            window.setStatusBarColor( name);
-        }else {
-            window.setStatusBarColor( Color.TRANSPARENT);
+        if (color != 0) {
+            window.setStatusBarColor(color);
+        } else {
+            window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
 

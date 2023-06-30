@@ -2,13 +2,15 @@ package com.example.qmread.Utils;
 
 public class BaseResponse<T> {
 
-    private static int SUCCESS_CODE=200;//成功的code
+    private static int SUCCESS_CODE = 200;//成功的code
     private int code;                   //响应码
     private String message;             //提示信息
     private T results;                  //返回的具体数据
-    public boolean isSuccess(){
-        return getCode()==SUCCESS_CODE;
+
+    public boolean isSuccess() {
+        return getCode() == SUCCESS_CODE;
     }
+
     public static int getSuccessCode() {
         return SUCCESS_CODE;
     }
@@ -43,7 +45,7 @@ public class BaseResponse<T> {
 
     @Override
     public String toString() {
-        return "BaseReponse{" +
+        return "BaseResponse{" +
                 "code=" + code +
                 ", message='" + message + '\'' +
                 ", results=" + results +
